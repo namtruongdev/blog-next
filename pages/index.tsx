@@ -1,12 +1,11 @@
 import React, { ReactElement } from 'react';
 
-// import SEO from "../components/seo"
 import Layout from '../components/Layout';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 // const Article = loadable(() => import('../components/Articles'));
+type slogan = string[];
 
-const IndexPage = ({ location }): ReactElement => {
-  type slogan = string[];
+const IndexPage = (): ReactElement => {
   const strings: slogan = [
     "LẬP TRÌNH <span style='font-weight: 400'>BÀN CHÂN</span>",
     "LẬP TRÌNH <span style='font-weight: 400'>BẢN THÂN</span>",
@@ -15,7 +14,7 @@ const IndexPage = ({ location }): ReactElement => {
   return (
     <>
       <Layout>
-        {/* <Header strings={strings} /> */}
+        <Header strings={strings} />
         <main id="main" className="main">
           {/* <Article data={data} /> */}
           <h1>test</h1>
