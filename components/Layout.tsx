@@ -1,41 +1,53 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
+import React, { ReactNode, ReactElement } from 'react';
+import dynamic from 'next/dynamic';
+
+import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { useDarkMode } from '../hooks';
+import ThemeContextProvider from '../context/ThemeContext';
+
+const Footer = dynamic(() => import('./Footer'));
+const BackTop = dynamic(() => import('./Button/MenuButtom'));
+
+import { Theme } from '../types';
 
 type Props = {
-  children?: ReactNode
-  title?: string
-}
+  children?: ReactNode;
+};
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <header>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
-      </nav>
-    </header>
-    {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
-    </footer>
-  </div>
-)
+type MuiTheme = {
+  palette: {
+    type: Theme;
+    text: {
+      primary: string;
+    };
+  };
+};
+const Layout = ({ children }: Props): ReactElement => {
+  const [theme, toggleTheme, componentMounted] = useDarkMode();
+  const textColor: string =
+    theme === 'light' ? 'rgba(0,0,0,0.87)' : `rgba(255, 255, 255, 0.87)`;
+  if (!componentMounted) {
+    return <div />;
+  }
 
-export default Layout
+  const themeUI: MuiTheme = createMuiTheme({
+    palette: {
+      type: theme,
+      text: {
+        primary: textColor,
+      },
+    },
+  });
+
+  return (
+    <ThemeProvider theme={themeUI}>
+      <CssBaseline />
+      <ThemeContextProvider>{children}</ThemeContextProvider>
+      <Footer theme={theme}></Footer>
+      <BackTop theme={theme} toggleTheme={toggleTheme} />
+    </ThemeProvider>
+  );
+};
+
+export default Layout;

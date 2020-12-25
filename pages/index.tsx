@@ -1,15 +1,80 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import React, { ReactElement } from 'react';
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-)
+// import SEO from "../components/seo"
+import Layout from '../components/Layout';
+// import Header from '../components/Header';
+// const Article = loadable(() => import('../components/Articles'));
 
-export default IndexPage
+const IndexPage = ({ location }): ReactElement => {
+  type slogan = string[];
+  const strings: slogan = [
+    "LẬP TRÌNH <span style='font-weight: 400'>BÀN CHÂN</span>",
+    "LẬP TRÌNH <span style='font-weight: 400'>BẢN THÂN</span>",
+  ];
+
+  return (
+    <>
+      <Layout>
+        {/* <Header strings={strings} /> */}
+        <main id="main" className="main">
+          {/* <Article data={data} /> */}
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+          <h1>test</h1>
+        </main>
+      </Layout>
+    </>
+  );
+};
+
+export default IndexPage;
