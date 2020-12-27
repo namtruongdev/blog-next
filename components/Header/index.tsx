@@ -1,7 +1,22 @@
 import React from 'react';
 
-const index = () => {
-  return <div></div>;
+import Hero from './Hero';
+import Mouse from './Mouse';
+import Nav from './Menu/Nav';
+
+type Props = {
+  strings: [string, string];
+  categories: object[];
 };
 
-export default index;
+const Header = ({ strings, categories }: Props) => {
+  return (
+    <header>
+      <Nav categories={categories} />
+      <Hero strings={strings} />
+      <Mouse />
+    </header>
+  );
+};
+
+export default Header;

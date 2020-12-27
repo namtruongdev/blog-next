@@ -1,13 +1,12 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { ReactNode, ReactElement, useContext } from 'react';
 import dynamic from 'next/dynamic';
 
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { useDarkMode } from '../hooks';
-import ThemeContextProvider from '../context/ThemeContext';
+import { ThemeContext } from '../context/ThemeContext';
 
 const Footer = dynamic(() => import('./Footer'));
-const BackTop = dynamic(() => import('./Button/MenuButtom'));
+const MenuBottom = dynamic(() => import('./Button/MenuBottom'));
 
 import { Theme } from '../types';
 
@@ -24,7 +23,8 @@ type MuiTheme = {
   };
 };
 const Layout = ({ children }: Props): ReactElement => {
-  const [theme, toggleTheme, componentMounted] = useDarkMode();
+  const { theme, toggleTheme, componentMounted } = useContext(ThemeContext);
+
   const textColor: string =
     theme === 'light' ? 'rgba(0,0,0,0.87)' : `rgba(255, 255, 255, 0.87)`;
   if (!componentMounted) {
@@ -43,9 +43,9 @@ const Layout = ({ children }: Props): ReactElement => {
   return (
     <ThemeProvider theme={themeUI}>
       <CssBaseline />
-      <ThemeContextProvider>{children}</ThemeContextProvider>
+      {children}
       <Footer theme={theme}></Footer>
-      <BackTop theme={theme} toggleTheme={toggleTheme} />
+      <MenuBottom theme={theme} toggleTheme={toggleTheme} />
     </ThemeProvider>
   );
 };
