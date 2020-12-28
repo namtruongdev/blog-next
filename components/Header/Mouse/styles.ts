@@ -13,9 +13,12 @@ export const IconMouse = styled.i`
   display: block;
   width: 25px;
   height: 40px;
-
   border-radius: 25px;
   position: relative;
+  border: ${(props) =>
+    props.theme === 'dark'
+      ? '2px solid rgba(255, 255, 255, 0.87)'
+      : '2px solid rgba(0, 0, 0, 0.87)'};
 
   &:before {
     position: absolute;
@@ -29,16 +32,10 @@ export const IconMouse = styled.i`
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
     animation-name: scroll;
-    border: ${(props) =>
+    background: ${(props) =>
       props.theme === 'dark'
-        ? '2px solid rgba(255, 255, 255, 0.87)'
-        : '2px solid rgba(0, 0, 0, 0.87)'};
-    &:before {
-      background: ${(props) =>
-        props.theme === 'dark'
-          ? 'rgba(255, 255, 255, 0.87)'
-          : 'rgba(0, 0, 0, 0.87)'};
-    }
+        ? 'rgba(255, 255, 255, 0.87)'
+        : 'rgba(0, 0, 0, 0.87)'};
   }
 `;
 

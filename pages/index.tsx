@@ -1,15 +1,17 @@
 import React, { ReactElement } from 'react';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
 import { client } from '../utils';
 import Layout from '../components/Layout';
 import Header from '../components/Header';
-// const Article = loadable(() => import('../components/Articles'));
+
+const Article = dynamic(() => import('../components/Articles'));
 
 type Slogan = [string, string];
 
-const IndexPage = ({ posts, categories }: any): ReactElement => {
-  console.log(posts[0].fields.category);
+const IndexPage: NextPage = ({ posts, categories }: any): ReactElement => {
+  console.log(posts);
 
   const strings: Slogan = [
     "LẬP TRÌNH <span style='font-weight: 400'>BÀN CHÂN</span>",
@@ -21,10 +23,7 @@ const IndexPage = ({ posts, categories }: any): ReactElement => {
       <Layout>
         <Header strings={strings} categories={categories} />
         <main id="main" className="main">
-          {/* <Article data={data} /> */}
-          {posts.map((post: any, index: number) => (
-            <h1 key={index}>{post.fields.title}</h1>
-          ))}
+          <Article data={posts} />
         </main>
       </Layout>
     </>
@@ -33,7 +32,8 @@ const IndexPage = ({ posts, categories }: any): ReactElement => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await client.getEntries({
-    content_type: 'article',
+    include: 5,
+    limit: 2,
   });
   const categories = await client.getEntries({
     content_type: 'category',
@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      posts: posts.items,
+      posts: posts,
       categories: categories.items,
     },
   };
