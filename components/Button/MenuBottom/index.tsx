@@ -155,7 +155,7 @@ const MenuBottom = (props: Props): ReactElement => {
           <Add />
         </Fab>
       </ScrollTrigger>
-      <FullScreenDialog theme={theme} />
+      <FullScreenDialog />
       <ToTop
         size="medium"
         color="secondary"
