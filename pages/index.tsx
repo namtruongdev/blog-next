@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import { GetStaticProps, NextPage } from 'next';
-import dynamic from 'next/dynamic';
 
 import { getAllPost, getAllCategory } from '../utils';
 import Layout from '../components/Layout';

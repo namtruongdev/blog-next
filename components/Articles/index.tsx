@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 
 import { PostWrap, PostList, PostItems } from './styles';
 
-const Paginator = dynamic(() => import('./Paginator'));
-const Item = dynamic(() => import('./Items'));
+import PreloadPost from './Items/PreloadPost';
 
-const Article = ({ posts, limit, total }: any) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+const Paginator = dynamic(() => import('./Paginator'));
+const Item = dynamic(() => import('./Items'), {
+  loading: () => <PreloadPost />,
+});
+
+const Article = ({ posts, limit, total, skip }: any) => {
+  const currentPage = skip === 0 ? 1 : skip / 9 + 1;
 
   return (
     <PostWrap maxWidth="lg">
