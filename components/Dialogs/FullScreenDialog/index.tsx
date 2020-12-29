@@ -25,7 +25,7 @@ const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-export const FullScreenDialog = ({ theme }: Props): ReactElement => {
+export const FullScreenDialog = (): ReactElement => {
   const [open, setOpen] = React.useState<boolean>(false);
 
   const handleClickOpen = (): void => {
