@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { PostTitle, PostInfo, PostTVR, Thumb } from './styles';
+import { PostTitle, PostInfo, PostTVR, ThumbNail } from './styles';
 import Link from 'next/link';
 
 import { ThemeContext } from '../../../context/ThemeContext';
@@ -16,53 +16,32 @@ import { WhatshotRounded, QueryBuilderRounded } from '@material-ui/icons';
 import Skeleton from '@material-ui/lab/Skeleton';
 // import ViewCounter from "../ViewCounter"
 
-const Item = ({ data }) => {
-  const { title, thumbnail, excerpt, permalink, date, timeToRead } = data;
-  const NodeListImages = useImage();
-
-  const theme = useContext(ThemeContext);
-  const [fluid, setFluid] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    const fluid = NodeListImages.filter((image) => {
-      const assets = image.node.childCloudinaryAsset;
-      let imageName;
-      if (assets !== null) {
-        let imageNameSplit = assets.fluid.src.split('/');
-        imageName = imageNameSplit[imageNameSplit.length - 1];
-      }
-      return assets !== null && imageName === thumbnail;
-    });
-
-    setFluid(fluid);
-  }, [NodeListImages, thumbnail]);
+const Item = ({ title, slug, excerpt, date, cover, category }: any) => {
+  const { theme } = useContext(ThemeContext);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Card>
       <CardActionArea>
-        <Link href={`/${permalink}`}>
+        <Link href={category + '/' + slug}>
           {loading ? (
             <Skeleton variant="rect" height={216} />
           ) : (
-            <>
-              <Thumb
-                src="#"
-                width={299}
-                height={299}
+            <div>
+              <ThumbNail
+                src={`https:` + cover}
+                width={1200}
+                height={630}
                 layout="responsive"
                 draggable={false}
                 alt={title}
               />
-            </>
+            </div>
           )}
         </Link>
         <CardContent>
-          <Link href={`/${permalink}`}>
-            <PostTitle>
+          <Link href={category + '/' + slug}>
+            <PostTitle theme={theme}>
               <Typography gutterBottom variant="h5" component="h2">
                 {loading ? <Skeleton /> : title}
               </Typography>
@@ -85,12 +64,12 @@ const Item = ({ data }) => {
               </PostTVR>
             </Typography>
             <Typography variant="caption" color="textSecondary">
-              <ViewCounter id={permalink} />
+              {/* <ViewCounter id={slug} /> */}
             </Typography>
             <Typography variant="caption" color="textSecondary">
               <PostTVR>
                 <WhatshotRounded fontSize="inherit" />
-                {` ${timeToRead} phút đọc`}
+                {/* {` ${timeToRead} phút đọc`} */}
               </PostTVR>
             </Typography>
           </>

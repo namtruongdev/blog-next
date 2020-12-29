@@ -28,6 +28,6 @@ export const PostTVR = styled.span`
   }
 `;
 
-export const Thumb = styled(Image)`
-  max-height: 216px !important;
+export const ThumbNail = styled(({ ...props }) => <Image {...props} />)`
+  max-height: 216px;
 `;

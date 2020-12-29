@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useCallback } from 'react';
 import type { AppProps } from 'next/app';
 
-import 'react-typed/dist/animatedCursor.css';
+import { CssBaseline } from '@material-ui/core';
 import '../styles/global.scss';
+import 'react-typed/dist/animatedCursor.css';
 
 import ThemeContextProvider from '../context/ThemeContext';
 
@@ -71,7 +72,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
   return (
     <ThemeContextProvider>
-      <Component {...pageProps} />;
+      <CssBaseline />
+      <Component {...pageProps} />
     </ThemeContextProvider>
   );
 };

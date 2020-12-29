@@ -136,7 +136,7 @@ const MenuBottom = (props: Props): ReactElement => {
 
   const handleToTopClick = (): void => {
     if (typeof window !== undefined) {
-      const anchor = document.querySelector<HTMLElement>('#main');
+      const anchor = document.querySelector<HTMLElement>('#navigation');
       if (anchor) {
         anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }

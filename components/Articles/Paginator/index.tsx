@@ -10,11 +10,16 @@ const PostPagigator = styled(({ ...props }) => <Pagination {...props} />)`
   }
 `;
 
-const Paginator = (): ReactElement => {
-  const currentPage = 3;
-  const postPerPage = 9;
-  const totalPosts = 30;
-  const numberOfPages = Math.ceil(totalPosts / postPerPage);
+const Paginator = ({
+  currentPage,
+  limit,
+  total,
+}: {
+  currentPage: number;
+  limit: number;
+  total: number;
+}): ReactElement => {
+  const numberOfPages = Math.ceil(total / limit);
 
   return (
     <PostPagigator

@@ -1,32 +1,54 @@
 import React, { ReactElement } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { NextPage } from 'next';
+import Image from 'next/image';
+
+import { Typography } from '@material-ui/core';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-import { getPostBySlug } from '../../utils';
+import { getPostBySlug, getAllSlug } from '../../utils';
 
-const Post = ({ post }: any): ReactElement => {
-  console.log(post);
+import Layout from '../../components/Layout';
+import { BLOCKS } from '../../types';
 
+const Post: NextPage = ({ post }: any): ReactElement => {
   return (
-    <div>
-      <h1>{post.fields.title}</h1>
-      <main>{documentToReactComponents(post.fields.content)}</main>
-    </div>
+    <Layout>
+      <h1>{post.title}</h1>
+      <main>
+        <article>
+          {documentToReactComponents(post.body, {
+            renderNode: {
+              [BLOCKS.EMBEDDED_ASSET]: (node) => (
+                <Image
+                  src={`https:` + node.data.target.fields.file.url}
+                  alt={node.data.target.fields.title}
+                  width={node.data.target.fields.file.details.image.width}
+                  height={node.data.target.fields.file.details.image.height}
+                  layout="intrinsic"
+                  draggable="false"
+                />
+              ),
+
+              [BLOCKS.PARAGRAPH]: (node, children) => (
+                <Typography variant="body1" component="p">
+                  {children}
+                </Typography>
+              ),
+            },
+          })}
+        </article>
+      </main>
+    </Layout>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await client.getEntries({
-    content_type: 'article',
-  });
+  const params = await getAllSlug();
 
   return {
-    paths: data.items.map((item: any) => ({
-      params: {
-        slug: item.fields.slug,
-      },
-    })),
+    paths: params,
     fallback: false,
   };
 };
@@ -34,13 +56,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const data = await client.getEntries({
-    content_type: 'article',
-    'fields.slug': params?.slug,
-  });
+  const post = await getPostBySlug(params);
+
   return {
     props: {
-      post: data.items[0],
+      post: post,
     },
   };
 };

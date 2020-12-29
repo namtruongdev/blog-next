@@ -20,7 +20,7 @@ const Nav = ({ categories }: Props) => {
           </Link>
         </Hidden>
         <Hidden smDown>
-          <nav>
+          <nav id="navigation">
             <ul>
               <NavLi>
                 <Link href="/" passHref>
@@ -29,11 +29,11 @@ const Nav = ({ categories }: Props) => {
                   </NavLink>
                 </Link>
               </NavLi>
-              {categories.map((category: any, index: number) => (
-                <NavLi key={index}>
-                  <Link href={`/categories/${category.fields.slug}`} passHref>
+              {categories.map((category: any) => (
+                <NavLi key={category.id}>
+                  <Link href={`/categories/${category.slug}`} passHref>
                     <NavLink className="hvr-underline-from-center">
-                      {category.fields.title}
+                      {category.title}
                     </NavLink>
                   </Link>
                 </NavLi>

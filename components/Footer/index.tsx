@@ -24,68 +24,72 @@ type FooterProps = {
   theme: Theme;
 };
 
-const Footer = ({ theme }: FooterProps): ReactElement => (
-  <FooterWrap>
-    <FooterLine maxWidth="sm">
-      <Divider variant="middle" />
-    </FooterLine>
-    <FooterSocial maxWidth="lg">
-      <a
-        href="https://www.facebook.com/truongduongg99/"
-        target="_blank"
-        rel="noreferrer"
-        title="Facebook"
-      >
-        <FooterFb aria-label="facebook">
-          <FacebookIcon />
-        </FooterFb>
-      </a>
-      <a
-        href="https://t.me/truongduong99"
-        target="_blank"
-        rel="noreferrer"
-        title="Telegram"
-      >
-        <FooterTele aria-label="telegram">
-          <TelegramIcon />
-        </FooterTele>
-      </a>
-      <a
-        href="https://github.com/namtruongdev"
-        target="_blank"
-        rel="noreferrer"
-        title="Github"
-      >
-        <FooterGithub theme={theme}>
-          <GitHubIcon />
-        </FooterGithub>
-      </a>
-      <a
-        href="mailto:hi@duongnamtruong.com"
-        target="_blank"
-        rel="noreferrer"
-        title="Email"
-      >
-        <FooterYandex aria-label="email">
-          <MailOutlineRoundedIcon />
-        </FooterYandex>
-      </a>
-    </FooterSocial>
-    <FooterCopyright maxWidth="lg">
-      <p>
-        Bản quyền © {new Date().getFullYear()}. Được tạo nên từ{' '}
-        <HeartIcon fontSize="inherit" /> của
-        <FooterCopyrightAuthor
+const Footer = ({ theme }: FooterProps): ReactElement => {
+  console.log(theme);
+
+  return (
+    <FooterWrap id="footer">
+      <FooterLine maxWidth="sm">
+        <Divider variant="middle" />
+      </FooterLine>
+      <FooterSocial maxWidth="lg">
+        <a
           href="https://www.facebook.com/truongduongg99/"
           target="_blank"
           rel="noreferrer"
+          title="Facebook"
         >
-          {' '}
-          Dương Nam Trường
-        </FooterCopyrightAuthor>
-      </p>
-    </FooterCopyright>
-  </FooterWrap>
-);
+          <FooterFb aria-label="facebook">
+            <FacebookIcon />
+          </FooterFb>
+        </a>
+        <a
+          href="https://t.me/truongduong99"
+          target="_blank"
+          rel="noreferrer"
+          title="Telegram"
+        >
+          <FooterTele aria-label="telegram">
+            <TelegramIcon />
+          </FooterTele>
+        </a>
+        <a
+          href="https://github.com/namtruongdev"
+          target="_blank"
+          rel="noreferrer"
+          title="Github"
+        >
+          <FooterGithub theme={theme}>
+            <GitHubIcon />
+          </FooterGithub>
+        </a>
+        <a
+          href="mailto:hi@duongnamtruong.com"
+          target="_blank"
+          rel="noreferrer"
+          title="Email"
+        >
+          <FooterYandex aria-label="email">
+            <MailOutlineRoundedIcon />
+          </FooterYandex>
+        </a>
+      </FooterSocial>
+      <FooterCopyright maxWidth="lg">
+        <p>
+          Bản quyền © {new Date().getFullYear()}. Được tạo nên từ{' '}
+          <HeartIcon fontSize="inherit" /> của
+          <FooterCopyrightAuthor
+            href="https://www.facebook.com/truongduongg99/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {' '}
+            Dương Nam Trường
+          </FooterCopyrightAuthor>
+        </p>
+      </FooterCopyright>
+    </FooterWrap>
+  );
+};
 
 export default Footer;

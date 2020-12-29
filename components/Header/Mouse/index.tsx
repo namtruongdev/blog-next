@@ -6,7 +6,7 @@ import { HeroContainer, IconMouse, ButtonScroll } from './styles';
 
 const handleClick = (): void => {
   if (typeof window !== 'undefined') {
-    const anchor = document.querySelector<HTMLElement>('#main');
+    const anchor = document.querySelector<HTMLElement>('#footer');
 
     if (anchor) {
       anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -15,8 +15,7 @@ const handleClick = (): void => {
 };
 
 const Mouse = (): ReactElement => {
-  const theme = useContext(ThemeContext);
-
+  const { theme } = useContext(ThemeContext);
   return (
     <HeroContainer theme={theme}>
       <ButtonScroll onClick={handleClick}>
