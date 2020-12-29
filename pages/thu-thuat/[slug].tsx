@@ -31,7 +31,7 @@ const Post: NextPage = ({ post }: any): ReactElement => {
                 />
               ),
 
-              [BLOCKS.PARAGRAPH]: (node, children) => (
+              [BLOCKS.PARAGRAPH]: (children) => (
                 <Typography variant="body1" component="p">
                   {children}
                 </Typography>
