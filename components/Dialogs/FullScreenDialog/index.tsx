@@ -15,8 +15,6 @@ import { SlideProps } from '@material-ui/core/Slide';
 import { Slide, Typography } from '@material-ui/core';
 import { MenuRounded } from '@material-ui/icons';
 
-import { Theme } from '../../../types';
-
 const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
