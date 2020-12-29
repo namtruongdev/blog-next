@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { PostTitle, PostInfo, PostTVR, ThumbNail } from './styles';
 import Link from 'next/link';
