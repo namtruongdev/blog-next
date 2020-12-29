@@ -17,10 +17,6 @@ import { MenuRounded } from '@material-ui/icons';
 
 import { Theme } from '../../../types';
 
-type Props = {
-  theme: Theme;
-};
-
 const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
