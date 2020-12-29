@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Dialog, Slide, Fab, Typography } from '@material-ui/core';
-import { MenuRounded, FavoriteRounded, CloseRounded } from '@material-ui/icons';
+import { Dialog, Fab } from '@material-ui/core';
+import { FavoriteRounded, CloseRounded } from '@material-ui/icons';
 
 export const Menu = styled(Fab)`
   position: fixed;
