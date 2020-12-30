@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 
 import { NavContainer, NavFlex, NavLi, NavLink } from './styles';
@@ -47,4 +47,4 @@ const Nav = ({ categories }: Props) => {
   );
 };
 
-export default Nav;
+export default memo(Nav);

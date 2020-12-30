@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, memo } from 'react';
 import { SwitchModeIcon, Sunny, Moon } from './styles';
 import { Theme } from '../../../types';
 
@@ -21,4 +21,4 @@ const DarkMode = ({ theme, toggleTheme }: Props): ReactElement => {
   );
 };
 
-export default DarkMode;
+export default memo(DarkMode);

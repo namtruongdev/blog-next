@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 
 import { PostTitle, PostInfo, PostTVR, ThumbNail } from './styles';
 import Link from 'next/link';
@@ -67,4 +67,4 @@ const Item = ({ title, slug, excerpt, date, cover, category }: any) => {
   );
 };
 
-export default Item;
+export default memo(Item);

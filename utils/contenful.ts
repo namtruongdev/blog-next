@@ -40,7 +40,7 @@ export const getAllSlug = async () => {
 
 export const getAllPost = async (
   { limit, skip, tag }: { limit?: number; skip?: number; tag?: string } = {
-    limit: 9,
+    limit: 1,
     skip: 0,
     tag: '',
   }

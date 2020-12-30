@@ -1,4 +1,10 @@
-import React, { ReactElement, useState, useEffect, ReactNode } from 'react';
+import React, {
+  ReactElement,
+  useState,
+  useEffect,
+  ReactNode,
+  memo,
+} from 'react';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
@@ -170,4 +176,4 @@ const MenuBottom = (props: Props): ReactElement => {
   );
 };
 
-export default MenuBottom;
+export default memo(MenuBottom);

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext } from 'react';
 import {
   HeroImage,
   SiteName,
@@ -88,4 +88,4 @@ const Hero = ({ strings }: Props) => {
   );
 };
 
-export default Hero;
+export default memo(Hero);

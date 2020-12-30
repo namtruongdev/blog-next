@@ -1,7 +1,6 @@
-import React, { ReactElement } from 'react';
-import Link from 'next/link';
+import React, { ReactElement, memo } from 'react';
 
-import { Pagination, PaginationItem } from '@material-ui/lab';
+import { Pagination } from '@material-ui/lab';
 import styled from 'styled-components';
 
 const PostPagigator = styled(({ ...props }) => <Pagination {...props} />)`
@@ -14,10 +13,12 @@ const Paginator = ({
   currentPage,
   limit,
   total,
+  setPage,
 }: {
   currentPage: number;
   limit: number;
   total: number;
+  setPage: Function;
 }): ReactElement => {
   const numberOfPages = Math.ceil(total / limit);
 
@@ -26,16 +27,11 @@ const Paginator = ({
       color="secondary"
       page={currentPage}
       count={numberOfPages}
-      renderItem={(item: any) => (
-        <Link
-          href={`${item.page === 1 ? '/' : `/trang-${item.page}`}`}
-          passHref
-        >
-          <PaginationItem component="a" {...item} />
-        </Link>
-      )}
+      onChange={(_e: any, page: number) => {
+        setPage(page * limit - limit);
+      }}
     ></PostPagigator>
   );
 };
 
-export default Paginator;
+export default memo(Paginator);

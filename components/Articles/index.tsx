@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 
 import { PostWrap, PostList, PostItems } from './styles';
@@ -10,13 +10,15 @@ const Item = dynamic(() => import('./Items'), {
   loading: () => <PreloadPost />,
 });
 
-const Article = ({ posts, limit, total, skip }: any) => {
-  const currentPage = skip === 0 ? 1 : skip / 9 + 1;
+const Article = ({ posts, limit, total, skip, setPage }: any) => {
+  const currentPage = useMemo(() => (skip === 0 ? 1 : skip / limit + 1), [
+    skip,
+  ]);
 
   return (
     <PostWrap maxWidth="lg">
       <PostList container spacing={4}>
-        {posts.map((post: any) => {
+        {posts?.reverse().map((post: any) => {
           const details = {
             id: post.id,
             title: post.title,
@@ -35,9 +37,14 @@ const Article = ({ posts, limit, total, skip }: any) => {
         })}
       </PostList>
 
-      <Paginator currentPage={currentPage} limit={limit} total={total} />
+      <Paginator
+        currentPage={currentPage}
+        limit={limit}
+        total={total}
+        setPage={setPage}
+      />
     </PostWrap>
   );
 };
 
-export default Article;
+export default memo(Article);

@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { memo, ReactElement, useContext } from 'react';
 
 import { ThemeContext } from '../../../context/ThemeContext';
 
@@ -25,4 +25,4 @@ const Mouse = (): ReactElement => {
   );
 };
 
-export default Mouse;
+export default memo(Mouse);
