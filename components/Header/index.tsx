@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import Hero from './Hero';
 import Mouse from './Mouse';
@@ -19,4 +19,4 @@ const Header = ({ strings, categories }: Props) => {
   );
 };
 
-export default Header;
+export default memo(Header);
