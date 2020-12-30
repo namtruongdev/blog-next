@@ -18,7 +18,9 @@ const Article = ({ posts, limit, total, skip, setPage }: any) => {
     <PostWrap maxWidth="lg">
       <PostList container spacing={4}>
         {!posts ? (
-          <PreloadPost />
+          <PostItems item sm={6} md={4} xs={12}>
+            <PreloadPost />
+          </PostItems>
         ) : (
           posts?.reverse().map((post: any) => {
             const details = {
