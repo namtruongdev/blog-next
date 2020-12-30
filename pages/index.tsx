@@ -17,8 +17,10 @@ const IndexPage: NextPage = ({ categories }: any): ReactElement => {
     "LẬP TRÌNH <span style='font-weight: 400'>BẢN THÂN</span>",
   ];
 
-  const { data } = useSWR([skip], (skip) =>
-    getAllPost({ limit: 1, skip: skip })
+  const { data } = useSWR(
+    [skip],
+    (skip) => getAllPost({ limit: 9, skip: skip }),
+    { refreshInterval: 1000 }
   );
 
   const setPage = useCallback((skip: number): void => setSkip(skip), [skip]);

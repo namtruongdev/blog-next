@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import styled from 'styled-components';
 
-import { CardActions } from '@material-ui/core';
+import { CardActions, Typography } from '@material-ui/core';
 
 export const PostTitle = styled.a`
   text-decoration: none;
@@ -30,4 +30,10 @@ export const PostTVR = styled.span`
 
 export const ThumbNail = styled(({ ...props }) => <Image {...props} />)`
   max-height: 216px;
+`;
+
+export const Excerpt = styled(({ ...props }) => <Typography {...props} />)`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;

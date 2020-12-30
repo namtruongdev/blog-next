@@ -13,8 +13,6 @@ import Layout from '../../components/Layout';
 import { BLOCKS } from '../../types';
 
 const Post: NextPage = ({ post }: any): ReactElement => {
-  console.log(post);
-
   return (
     <Layout>
       <h1>{post.title}</h1>

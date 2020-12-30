@@ -1,6 +1,6 @@
 import React, { useContext, memo } from 'react';
 
-import { PostTitle, PostInfo, PostTVR, ThumbNail } from './styles';
+import { PostTitle, PostInfo, PostTVR, ThumbNail, Excerpt } from './styles';
 import Link from 'next/link';
 
 import { ThemeContext } from '../../../context/ThemeContext';
@@ -41,9 +41,9 @@ const Item = ({ title, slug, excerpt, date, cover, category }: any) => {
               </Typography>
             </PostTitle>
           </Link>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Excerpt variant="body2" color="textSecondary" component="p">
             {excerpt}
-          </Typography>
+          </Excerpt>
         </CardContent>
       </CardActionArea>
       <PostInfo>

@@ -14,6 +14,8 @@ const Article = ({ posts, limit, total, skip, setPage }: any) => {
   const currentPage = useMemo(() => (skip === 0 ? 1 : skip / limit + 1), [
     skip,
   ]);
+  console.log(posts);
+
   return (
     <PostWrap maxWidth="lg">
       <PostList container spacing={4}>
