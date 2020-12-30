@@ -13,6 +13,8 @@ import Layout from '../../components/Layout';
 import { BLOCKS } from '../../types';
 
 const Post: NextPage = ({ post }: any): ReactElement => {
+  console.log(post);
+
   return (
     <Layout>
       <h1>{post.title}</h1>
@@ -31,7 +33,7 @@ const Post: NextPage = ({ post }: any): ReactElement => {
                 />
               ),
 
-              [BLOCKS.PARAGRAPH]: (node, children) => (
+              [BLOCKS.PARAGRAPH]: (_node, children) => (
                 <Typography variant="body1" component="p">
                   {children}
                 </Typography>
