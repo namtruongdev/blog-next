@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { memo, ReactElement } from 'react';
 import {
   FooterWrap,
   FooterLine,
@@ -25,8 +25,6 @@ type FooterProps = {
 };
 
 const Footer = ({ theme }: FooterProps): ReactElement => {
-  console.log(theme);
-
   return (
     <FooterWrap id="footer">
       <FooterLine maxWidth="sm">
@@ -92,4 +90,4 @@ const Footer = ({ theme }: FooterProps): ReactElement => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

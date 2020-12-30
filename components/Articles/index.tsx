@@ -14,27 +14,30 @@ const Article = ({ posts, limit, total, skip, setPage }: any) => {
   const currentPage = useMemo(() => (skip === 0 ? 1 : skip / limit + 1), [
     skip,
   ]);
-
   return (
     <PostWrap maxWidth="lg">
       <PostList container spacing={4}>
-        {posts?.reverse().map((post: any) => {
-          const details = {
-            id: post.id,
-            title: post.title,
-            cover: post.cover,
-            excerpt: post.excerpt,
-            slug: post.slug,
-            date: post.date,
-            category: post.category.fields.slug,
-          };
+        {!posts ? (
+          <PreloadPost />
+        ) : (
+          posts?.reverse().map((post: any) => {
+            const details = {
+              id: post.id,
+              title: post.title,
+              cover: post.cover,
+              excerpt: post.excerpt,
+              slug: post.slug,
+              date: post.date,
+              category: post.category.fields.slug,
+            };
 
-          return (
-            <PostItems item sm={6} md={4} xs={12} key={post.id}>
-              <Item {...details} />
-            </PostItems>
-          );
-        })}
+            return (
+              <PostItems item sm={6} md={4} xs={12} key={post.id}>
+                <Item {...details} />
+              </PostItems>
+            );
+          })
+        )}
       </PostList>
 
       <Paginator
