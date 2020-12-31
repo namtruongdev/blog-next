@@ -13,9 +13,17 @@ import {
 } from '@material-ui/core';
 import { WhatshotRounded, QueryBuilderRounded } from '@material-ui/icons';
 
-// import ViewCounter from "../ViewCounter"
+import ViewCounter from './ViewCounter';
 
-const Item = ({ title, slug, excerpt, date, cover, category }: any) => {
+const Item = ({
+  title,
+  slug,
+  excerpt,
+  date,
+  cover,
+  category,
+  readingTime,
+}: any) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -54,12 +62,12 @@ const Item = ({ title, slug, excerpt, date, cover, category }: any) => {
           </PostTVR>
         </Typography>
         <Typography variant="caption" color="textSecondary">
-          {/* <ViewCounter id={slug} /> */}
+          <ViewCounter slug="/hoc-lap-trinh/5-cach-dao-nguoc-chuoi-trong-javascript" />
         </Typography>
         <Typography variant="caption" color="textSecondary">
           <PostTVR>
             <WhatshotRounded fontSize="inherit" />
-            {/* {` ${timeToRead} phút đọc`} */}
+            {` ${readingTime} phút đọc`}
           </PostTVR>
         </Typography>
       </PostInfo>

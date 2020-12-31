@@ -32,6 +32,7 @@ const Article = ({ posts, limit, total, skip, setPage }: any) => {
               slug: post.slug,
               date: post.date,
               category: post.category.fields.slug,
+              readingTime: Math.ceil(post.readingTime.minutes),
             };
 
             return (

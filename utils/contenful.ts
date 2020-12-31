@@ -1,5 +1,10 @@
 import * as contentful from 'contentful';
 
+import { formatDistanceToNow } from 'date-fns';
+import { vi } from 'date-fns/locale';
+import readingTime from 'reading-time';
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+
 const client = contentful.createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || '',
   accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN || '',
@@ -62,7 +67,11 @@ export const getAllPost = async (
       slug: fields.slug,
       category: fields.category,
       tags: fields.tags,
-      date: fields.date,
+      date: formatDistanceToNow(new Date(fields.date), {
+        locale: vi,
+        addSuffix: true,
+      }),
+      readingTime: readingTime(documentToPlainTextString(fields.body)),
     })
   );
 
