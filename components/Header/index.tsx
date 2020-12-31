@@ -7,12 +7,13 @@ import Nav from './Menu/Nav';
 type Props = {
   strings: [string, string];
   categories: object[];
+  setPage: Function;
 };
 
-const Header = ({ strings, categories }: Props) => {
+const Header = ({ strings, categories, setPage }: Props) => {
   return (
     <header>
-      <Nav categories={categories} />
+      <Nav categories={categories} setPage={setPage} />
       <Hero strings={strings} />
       <Mouse />
     </header>

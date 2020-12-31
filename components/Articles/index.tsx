@@ -14,7 +14,6 @@ const Article = ({ posts, limit, total, skip, setPage }: any) => {
   const currentPage = useMemo(() => (skip === 0 ? 1 : skip / limit + 1), [
     skip,
   ]);
-  console.log(posts);
 
   return (
     <PostWrap maxWidth="lg">
@@ -24,7 +23,7 @@ const Article = ({ posts, limit, total, skip, setPage }: any) => {
             <PreloadPost />
           </PostItems>
         ) : (
-          posts?.reverse().map((post: any) => {
+          posts.map((post: any) => {
             const details = {
               id: post.id,
               title: post.title,

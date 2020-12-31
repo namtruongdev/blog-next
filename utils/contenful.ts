@@ -11,7 +11,7 @@ const CONTENT_TYPE_CATEGORY = 'category';
 export const getPostBySlug = async (slug: any) => {
   const data = await client.getEntries({
     content_type: CONTENT_TYPE_ARTICLE,
-    'fields.slug': slug,
+    'fields.slug': slug.slug,
   });
 
   const entry: { sys: any; fields: any } = data.items[0];
@@ -31,6 +31,7 @@ export const getAllSlug = async () => {
 
   const params = posts.map((post) => ({
     params: {
+      category: post.fields.category.fields.slug,
       slug: post.fields.slug,
     },
   }));
@@ -50,7 +51,6 @@ export const getAllPost = async (
     limit,
     skip,
     'fields.tags.sys.id': tag,
-    order: 'fields.date',
   });
 
   const posts = data.items.map(

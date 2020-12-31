@@ -8,15 +8,21 @@ import Hidden from '@material-ui/core/Hidden';
 
 type Props = {
   categories: object[];
+  setPage: Function;
 };
 
-const Nav = ({ categories }: Props) => {
+const Nav = ({ categories, setPage }: Props) => {
   return (
     <NavContainer maxWidth="lg">
       <NavFlex>
         <Hidden mdUp>
           <Link href="/" passHref>
-            <NavLink className="hvr-underline-from-center">Trang chủ</NavLink>
+            <NavLink
+              className="hvr-underline-from-center"
+              onClick={() => setPage(0)}
+            >
+              Trang chủ
+            </NavLink>
           </Link>
         </Hidden>
         <Hidden smDown>
@@ -24,7 +30,10 @@ const Nav = ({ categories }: Props) => {
             <ul>
               <NavLi>
                 <Link href="/" passHref>
-                  <NavLink className="hvr-underline-from-center">
+                  <NavLink
+                    className="hvr-underline-from-center"
+                    onClick={() => setPage(0)}
+                  >
                     Trang chủ
                   </NavLink>
                 </Link>

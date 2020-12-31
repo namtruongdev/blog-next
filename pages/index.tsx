@@ -28,7 +28,7 @@ const IndexPage: NextPage = ({ categories }: any): ReactElement => {
   return (
     <>
       <Layout>
-        <Header strings={strings} categories={categories} />
+        <Header strings={strings} categories={categories} setPage={setPage} />
         <main id="main" className="main">
           <Article {...data} setPage={setPage} />
         </main>
