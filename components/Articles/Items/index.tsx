@@ -62,7 +62,7 @@ const Item = ({
           </PostTVR>
         </Typography>
         <Typography variant="caption" color="textSecondary">
-          <ViewCounter slug="/hoc-lap-trinh/5-cach-dao-nguoc-chuoi-trong-javascript" />
+          <ViewCounter slug={category + '/' + slug} />
         </Typography>
         <Typography variant="caption" color="textSecondary">
           <PostTVR>

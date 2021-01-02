@@ -1,6 +1,7 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import { Typography } from '@material-ui/core';
@@ -13,6 +14,16 @@ import Layout from '../../components/Layout';
 import { BLOCKS } from '../../types';
 
 const Post: NextPage = ({ post }: any): ReactElement => {
+  const router = useRouter();
+  const uri = router.asPath;
+  useEffect(() => {
+    const registerView = () =>
+      fetch(`/api/views${uri}`, {
+        method: 'POST',
+      });
+    registerView();
+  }, []);
+
   return (
     <Layout>
       <h1>{post.title}</h1>

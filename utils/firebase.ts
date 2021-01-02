@@ -1,9 +1,12 @@
-import admin from 'firebase-admin';
-import config from '../laptrinhbanthan-firebase-adminsdk-61t0r-7209814517.json'
+import firebase from 'firebase/app';
 
-if (!admin.apps.length)
-  admin.initializeApp(config),
+import 'firebase/database';
+
+if (!firebase.apps.length)
+  firebase.initializeApp({
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   });
 
-export default admin.database();
+export default firebase.database();

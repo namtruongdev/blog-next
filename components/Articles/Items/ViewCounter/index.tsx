@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import styled from 'styled-components';
 
@@ -18,23 +18,13 @@ const fetcher = async (...args: Parameters<typeof fetch>) => {
 };
 
 const ViewCounter = ({ slug }: { slug: string }) => {
-  console.log(slug);
-
-  // const { data } = useSWR(`/api/views/${slug}`, fetcher);
+  const { data } = useSWR(`/api/views/${slug}`, fetcher);
 
   const views = data?.total;
 
-  // useEffect(() => {
-  //   const registerView = () =>
-  //     fetch(`/api/views/${slug}`, {
-  //       method: 'POST',
-  //     });
-  //   registerView();
-  // }, [slug]);
-
   return (
     <PostViews>
-      {/* <VisibilityIcon fontSize="inherit" /> {views} lượt xem */}
+      <VisibilityIcon fontSize="inherit" /> {views ? views : 0} lượt xem
     </PostViews>
   );
 };

@@ -56,6 +56,7 @@ export const getAllPost = async (
     limit,
     skip,
     'fields.tags.sys.id': tag,
+    order: '-fields.date',
   });
 
   const posts = data.items.map(
