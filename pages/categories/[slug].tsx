@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
@@ -15,11 +15,16 @@ import Article from '../../components/Articles';
 type Slogan = string[];
 
 const Category = ({ posts, categories }: { posts: Post; categories: any }) => {
-  const strings: Slogan = [categories[0].title.toUpperCase()];
+  console.log(posts);
+
+  const slogan: Slogan = useMemo(
+    () => [posts[0].category.fields.title.toUpperCase()],
+    [posts]
+  );
 
   return (
     <Layout>
-      <Header strings={strings} categories={categories} />
+      <Header strings={slogan} categories={categories} />
       <main id="main" className="main">
         <Article posts={posts} />
       </main>

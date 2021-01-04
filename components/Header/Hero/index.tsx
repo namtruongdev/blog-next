@@ -15,6 +15,8 @@ type Props = {
 };
 
 const Hero = ({ strings }: Props) => {
+  console.log('hero', strings);
+
   const { theme } = useContext(ThemeContext);
 
   return (

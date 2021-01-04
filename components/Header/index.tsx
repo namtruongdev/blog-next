@@ -11,6 +11,8 @@ type Props = {
 };
 
 const Header = ({ strings, categories, setPage }: Props) => {
+  console.log('header ren lai');
+
   return (
     <header>
       <Nav categories={categories} setPage={setPage} />

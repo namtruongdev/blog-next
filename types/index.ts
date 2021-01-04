@@ -21,7 +21,7 @@ export type Post = {
   excerpt: string;
   cover: string;
   slug: string;
-  category: object;
+  category: { sys: any; fields: any };
   tags: { sys: object; fields: object }[];
   date: string;
   readingTime: any;
