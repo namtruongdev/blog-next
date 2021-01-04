@@ -15,12 +15,12 @@ const Paginator = ({
   total,
   setPage,
 }: {
-  currentPage: number;
-  limit: number;
-  total: number;
-  setPage: Function;
+  currentPage?: number;
+  limit?: number;
+  total?: number;
+  setPage?: Function;
 }): ReactElement => {
-  const numberOfPages = Math.ceil(total / limit);
+  const numberOfPages = Math.ceil(total! / limit!);
 
   return (
     <PostPagigator
@@ -28,7 +28,7 @@ const Paginator = ({
       page={currentPage}
       count={numberOfPages}
       onChange={(_e: any, page: number) => {
-        setPage(page * limit - limit);
+        if (setPage) setPage(page * limit! - limit!);
       }}
     ></PostPagigator>
   );

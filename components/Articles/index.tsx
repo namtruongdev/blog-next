@@ -43,13 +43,16 @@ const Article = ({ posts, limit, total, skip, setPage }: any) => {
           })
         )}
       </PostList>
-
-      <Paginator
-        currentPage={currentPage}
-        limit={limit}
-        total={total}
-        setPage={setPage}
-      />
+      {total === undefined ? (
+        ''
+      ) : (
+        <Paginator
+          currentPage={currentPage}
+          limit={limit}
+          total={total}
+          setPage={setPage}
+        />
+      )}
     </PostWrap>
   );
 };

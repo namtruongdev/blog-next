@@ -11,7 +11,7 @@ import Typed from 'react-typed';
 import { ThemeContext } from '../../../context/ThemeContext';
 
 type Props = {
-  strings: [string, string];
+  strings: string[];
 };
 
 const Hero = ({ strings }: Props) => {

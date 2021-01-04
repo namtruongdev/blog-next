@@ -5,9 +5,9 @@ import Mouse from './Mouse';
 import Nav from './Menu/Nav';
 
 type Props = {
-  strings: [string, string];
+  strings: string[];
   categories: object[];
-  setPage: Function;
+  setPage?: any;
 };
 
 const Header = ({ strings, categories, setPage }: Props) => {

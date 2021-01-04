@@ -19,7 +19,7 @@ const Nav = ({ categories, setPage }: Props) => {
           <Link href="/" passHref>
             <NavLink
               className="hvr-underline-from-center"
-              onClick={() => setPage(0)}
+              onClick={() => (setPage === undefined ? null : setPage(0))}
             >
               Trang chủ
             </NavLink>
@@ -32,7 +32,7 @@ const Nav = ({ categories, setPage }: Props) => {
                 <Link href="/" passHref>
                   <NavLink
                     className="hvr-underline-from-center"
-                    onClick={() => setPage(0)}
+                    onClick={() => (setPage === undefined ? null : setPage(0))}
                   >
                     Trang chủ
                   </NavLink>

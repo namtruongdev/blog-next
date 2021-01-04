@@ -4,6 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import readingTime from 'reading-time';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import { Post } from '../types';
 
 const client = contentful.createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || '',
@@ -12,6 +13,11 @@ const client = contentful.createClient({
 
 const CONTENT_TYPE_ARTICLE = 'article';
 const CONTENT_TYPE_CATEGORY = 'category';
+
+type GetAllPost = {
+  limit: number;
+  skip: number;
+};
 
 export const getPostBySlug = async (slug: any) => {
   const data = await client.getEntries({
@@ -44,18 +50,11 @@ export const getAllSlug = async () => {
   return params;
 };
 
-export const getAllPost = async (
-  { limit, skip, tag }: { limit?: number; skip?: number; tag?: string } = {
-    limit: 1,
-    skip: 0,
-    tag: '',
-  }
-) => {
+export const getAllPost = async ({ limit, skip }: GetAllPost) => {
   const data = await client.getEntries({
     content_type: CONTENT_TYPE_ARTICLE,
     limit,
     skip,
-    'fields.tags.sys.id': tag,
     order: '-fields.date',
   });
 
@@ -94,4 +93,39 @@ export const getAllCategory = async () => {
   }));
 
   return categories;
+};
+
+export const getIdCategoryBySlug = async (slug: string) => {
+  const data = await client.getEntries({
+    content_type: CONTENT_TYPE_CATEGORY,
+    'fields.slug': slug,
+  });
+
+  return data.items[0].sys.id;
+};
+
+export const getPostByCategory = async (category: string) => {
+  const data = await client.getEntries({
+    content_type: CONTENT_TYPE_ARTICLE,
+    'fields.category.sys.id': category,
+    order: '-fields.date',
+  });
+
+  const posts: Post = data.items.map(
+    ({ sys, fields }: { sys: any; fields: any }) => ({
+      id: sys.id,
+      title: fields.title,
+      excerpt: fields.excerpt,
+      cover: fields.cover.fields.file.url,
+      slug: fields.slug,
+      category: fields.category,
+      tags: fields.tags,
+      date: formatDistanceToNow(new Date(fields.date), {
+        locale: vi,
+        addSuffix: true,
+      }),
+      readingTime: readingTime(documentToPlainTextString(fields.body)),
+    })
+  );
+  return { posts };
 };

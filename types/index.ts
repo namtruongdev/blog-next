@@ -14,3 +14,15 @@ export enum BLOCKS {
   EMBEDDED_ENTITY = 'embedded-entry-block',
   EMBEDDED_ASSET = 'embedded-asset-block',
 }
+
+export type Post = {
+  id: string;
+  title: string;
+  excerpt: string;
+  cover: string;
+  slug: string;
+  category: object;
+  tags: { sys: object; fields: object }[];
+  date: string;
+  readingTime: any;
+}[];
