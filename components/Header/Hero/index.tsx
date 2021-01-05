@@ -17,13 +17,15 @@ type Props = {
 const Hero = ({ strings }: Props) => {
   const { theme } = useContext(ThemeContext);
 
+  const stringsCheck = strings.length >= 2 ? strings[2] : strings;
+
   return (
     <>
       <HeroImage>
         <SiteName align="center" variant="h2" component="h1">
           <Typewriter
             onInit={(typewriter) => {
-              if (strings.length === 2)
+              if (strings.length >= 2)
                 typewriter
                   .typeString(strings[0])
                   .deleteChars(8)
@@ -31,6 +33,10 @@ const Hero = ({ strings }: Props) => {
                   .typeString(strings[1])
                   .start();
               else typewriter.typeString(strings[0]).start();
+            }}
+            options={{
+              autoStart: true,
+              strings: stringsCheck,
             }}
           ></Typewriter>
         </SiteName>
