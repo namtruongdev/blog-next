@@ -22,7 +22,7 @@ export type Post = {
   cover: string;
   slug: string;
   category: { sys: any; fields: any };
-  tags: { sys: object; fields: object }[];
+  tags: { sys: any; fields: any }[];
   date: string;
   readingTime: any;
 }[];

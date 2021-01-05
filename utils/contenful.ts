@@ -13,6 +13,7 @@ const client = contentful.createClient({
 
 const CONTENT_TYPE_ARTICLE = 'article';
 const CONTENT_TYPE_CATEGORY = 'category';
+const CONTENT_TYPE_TAG = 'tag';
 
 type GetAllPost = {
   limit: number;
@@ -108,6 +109,56 @@ export const getPostByCategory = async (category: string) => {
   const data = await client.getEntries({
     content_type: CONTENT_TYPE_ARTICLE,
     'fields.category.sys.id': category,
+    order: '-fields.date',
+  });
+
+  const posts: Post = data.items.map(
+    ({ sys, fields }: { sys: any; fields: any }) => ({
+      id: sys.id,
+      title: fields.title,
+      excerpt: fields.excerpt,
+      cover: fields.cover.fields.file.url,
+      slug: fields.slug,
+      category: fields.category,
+      tags: fields.tags,
+      date: formatDistanceToNow(new Date(fields.date), {
+        locale: vi,
+        addSuffix: true,
+      }),
+      readingTime: readingTime(documentToPlainTextString(fields.body)),
+    })
+  );
+  return { posts };
+};
+
+export const getAllTag = async () => {
+  const data = await client.getEntries({
+    content_type: CONTENT_TYPE_TAG,
+  });
+  const entries: { sys: any; fields: any }[] = data.items;
+
+  const tags = entries.map((entry) => ({
+    id: entry.sys.id,
+    title: entry.fields.title,
+    slug: entry.fields.slug,
+  }));
+
+  return tags;
+};
+
+export const getIdTagBySlug = async (slug: string) => {
+  const data = await client.getEntries({
+    content_type: CONTENT_TYPE_TAG,
+    'fields.slug': slug,
+  });
+
+  return data.items[0].sys.id;
+};
+
+export const getPostByTag = async (tag: string) => {
+  const data = await client.getEntries({
+    content_type: CONTENT_TYPE_ARTICLE,
+    'fields.tags.sys.id': tag,
     order: '-fields.date',
   });
 

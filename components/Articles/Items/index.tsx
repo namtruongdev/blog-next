@@ -26,10 +26,9 @@ const Item = ({
 }: any) => {
   const { theme } = useContext(ThemeContext);
 
-  const base = process.env.NEXT_PUBLIC_URL
-    ? process.env.NEXT_PUBLIC_URL
-    : 'http://localhost:3000/';
-  console.log(base);
+  const base = process.env.NEXT_PUBLIC_LOCAL
+    ? process.env.NEXT_PUBLIC_LOCAL
+    : window.location.href;
 
   return (
     <Card>

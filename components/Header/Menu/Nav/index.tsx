@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { NavContainer, NavFlex, NavLi, NavLink } from './styles';
 
 import Hidden from '@material-ui/core/Hidden';
-// import Search from '../Search';
+import Search from '../Search';
 
 type Props = {
   categories: object[];
@@ -50,7 +50,7 @@ const Nav = ({ categories, setPage }: Props) => {
             </ul>
           </nav>
         </Hidden>
-        {/* <Search /> */}
+        <Search />
       </NavFlex>
     </NavContainer>
   );
