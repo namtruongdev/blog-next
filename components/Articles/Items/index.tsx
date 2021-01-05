@@ -26,7 +26,7 @@ const Item = ({
 }: any) => {
   const { theme } = useContext(ThemeContext);
 
-  const base = process.env.NEXT_PUBLICURL
+  const base = process.env.NEXT_PUBLIC_URL
     ? process.env.NEXT_PUBLIC_URL
     : 'http://localhost:3000/';
 

@@ -13,8 +13,6 @@ const IndexPage: NextPage = ({ categories }: any): ReactElement => {
   const [skip, setSkip] = useState<number>(0);
 
   const strings: Slogan = [
-    "LẬP TRÌNH <span style='font-weight: 400'>BÀN CHÂN</span>",
-    "<span style='font-weight: 400'>BẢN THÂN</span>",
     "LẬP TRÌNH <span style='font-weight: 400'>BẢN THÂN</span>",
   ];
 
