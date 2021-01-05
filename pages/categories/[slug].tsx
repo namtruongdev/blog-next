@@ -15,8 +15,6 @@ import Article from '../../components/Articles';
 type Slogan = string[];
 
 const Category = ({ posts, categories }: { posts: Post; categories: any }) => {
-  console.log(posts);
-
   const slogan: Slogan = useMemo(
     () => [posts[0].category.fields.title.toUpperCase()],
     [posts]

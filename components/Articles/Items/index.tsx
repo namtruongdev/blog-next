@@ -26,10 +26,14 @@ const Item = ({
 }: any) => {
   const { theme } = useContext(ThemeContext);
 
+  const base = process.env.NEXT_PUBLIC_LOCAL_URL
+    ? process.env.NEXT_PUBLIC_URL
+    : 'http://localhost:3000/';
+
   return (
     <Card>
       <CardActionArea>
-        <Link href={category + '/' + slug}>
+        <Link href={base + category + '/' + slug}>
           <div>
             <ThumbNail
               src={`https:` + cover}
@@ -42,7 +46,7 @@ const Item = ({
           </div>
         </Link>
         <CardContent>
-          <Link href={category + '/' + slug}>
+          <Link href={base + category + '/' + slug}>
             <PostTitle theme={theme}>
               <Typography gutterBottom variant="h5" component="h2">
                 {title}

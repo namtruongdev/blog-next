@@ -14,7 +14,7 @@ const IndexPage: NextPage = ({ categories }: any): ReactElement => {
 
   const strings: Slogan = [
     "LẬP TRÌNH <span style='font-weight: 400'>BÀN CHÂN</span>",
-    "LẬP TRÌNH <span style='font-weight: 400'>BẢN THÂN</span>",
+    "<span style='font-weight: 400'>BẢN THÂN</span>",
   ];
 
   const { data } = useSWR(

@@ -7,7 +7,7 @@ import {
   PreviewParallax,
 } from './styles';
 
-import Typed from 'react-typed';
+import Typewriter from 'typewriter-effect';
 import { ThemeContext } from '../../../context/ThemeContext';
 
 type Props = {
@@ -15,21 +15,24 @@ type Props = {
 };
 
 const Hero = ({ strings }: Props) => {
-  console.log('hero', strings);
-
   const { theme } = useContext(ThemeContext);
 
   return (
     <>
       <HeroImage>
         <SiteName align="center" variant="h2" component="h1">
-          <Typed
-            strings={strings}
-            typeSpeed={50}
-            backSpeed={50}
-            smartBackspace
-            backDelay={1}
-          ></Typed>
+          <Typewriter
+            onInit={(typewriter) => {
+              if (strings.length === 2)
+                typewriter
+                  .typeString(strings[0])
+                  .deleteChars(8)
+                  .pauseFor(2500)
+                  .typeString(strings[1])
+                  .start();
+              else typewriter.typeString(strings[0]).start();
+            }}
+          ></Typewriter>
         </SiteName>
         <HeroOverlay>
           <PreviewWave

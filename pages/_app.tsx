@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app';
 
 import { CssBaseline } from '@material-ui/core';
 import '../styles/global.scss';
-import 'react-typed/dist/animatedCursor.css';
 
 import ThemeContextProvider from '../context/ThemeContext';
 
