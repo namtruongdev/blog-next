@@ -31,12 +31,14 @@ const Hero = ({ strings }: Props) => {
                   .deleteChars(8)
                   .pauseFor(2500)
                   .typeString(strings[1])
+                  .deleteAll()
                   .start();
               else typewriter.typeString(strings[0]).start();
             }}
             options={{
               autoStart: true,
               strings: stringsCheck,
+              loop: true,
             }}
           ></Typewriter>
         </SiteName>
