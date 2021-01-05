@@ -1,4 +1,5 @@
-import React from "react"
+import React from 'react';
+import Link from 'next/link';
 import {
   resultCount,
   listResults,
@@ -6,8 +7,7 @@ import {
   resultsExcerpt,
   lineResults,
   algoliaLogo,
-} from "./styles"
-import { Link } from "gatsby"
+} from './styles';
 import {
   connectStateResults,
   Highlight,
@@ -15,13 +15,13 @@ import {
   Index,
   Snippet,
   PoweredBy,
-} from "react-instantsearch-dom"
+} from 'react-instantsearch-dom';
 
-import Typography from "@material-ui/core/Typography"
-import Divider from "@material-ui/core/Divider"
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 const HitCount = connectStateResults(({ searchResults }) => {
-  const hitCount = searchResults && searchResults.nbHits
+  const hitCount = searchResults && searchResults.nbHits;
 
   return hitCount > 0 ? (
     <div className="HitCount" css={resultCount}>
@@ -29,8 +29,8 @@ const HitCount = connectStateResults(({ searchResults }) => {
         {hitCount} kết quả
       </Typography>
     </div>
-  ) : null
-})
+  ) : null;
+});
 
 const PageHit = ({ hit }) => (
   <>
@@ -49,29 +49,29 @@ const PageHit = ({ hit }) => (
     </Typography>
     <Divider variant="middle" css={lineResults} />
   </>
-)
+);
 
 const HitsInIndex = ({ index }) => (
   <Index indexName={index.name}>
     <HitCount />
     <Hits className="Hits" hitComponent={PageHit} css={listResults} />
   </Index>
-)
+);
 
 const SearchResult = ({ indices }) => {
   return (
     <div>
-      {indices.map(index => (
+      {indices.map((index) => (
         <HitsInIndex index={index} key={index.name} />
       ))}
       <PoweredBy
         css={algoliaLogo}
         translations={{
-          searchBy: "Sức mạnh tìm kiếm từ",
+          searchBy: 'Sức mạnh tìm kiếm từ',
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default SearchResult
+export default SearchResult;

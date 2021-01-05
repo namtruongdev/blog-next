@@ -89,14 +89,14 @@ export const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const quering = css`
+export const quering = styled.div`
   margin: 15px 0;
 `;
-export const resultCount = css`
+export const resultCount = styled.div`
   text-align: right;
 `;
 
-export const listResults = css`
+export const listResults = styled.div`
   & {
     ul {
       padding: 0;
@@ -108,7 +108,7 @@ export const listResults = css`
   }
 `;
 
-export const resultsLink = css`
+export const resultsLink = styled.div`
   text-decoration: none;
   &:hover h4 {
     color: #eb6383;
@@ -116,16 +116,16 @@ export const resultsLink = css`
   }
 `;
 
-export const resultsExcerpt = css`
+export const resultsExcerpt = styled.div`
   font-size: 0.75rem;
   letter-spacing: 0.4px;
 `;
 
-export const lineResults = css`
+export const lineResults = styled.div`
 margin 15px 0;
 `;
 
-export const algoliaLogo = css`
+export const algoliaLogo = styled.div`
   text-align: right;
   font-size: 0.75rem;
   letter-spacing: 0.4px;
