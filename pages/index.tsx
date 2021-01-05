@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 import Header from '../components/Header';
 import Article from '../components/Articles';
 
-type Slogan = [string, string];
+type Slogan = string[];
 
 const IndexPage: NextPage = ({ categories }: any): ReactElement => {
   const [skip, setSkip] = useState<number>(0);
