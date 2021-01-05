@@ -15,7 +15,8 @@ import { BLOCKS } from '../../types';
 
 const Post: NextPage = ({ post }: any): ReactElement => {
   const router = useRouter();
-  const uri = router.asPath;
+  const uri = '/' + (router.query.category as string) + '/' + router.query.slug;
+
   useEffect(() => {
     const registerView = () =>
       fetch(`/api/views${uri}`, {

@@ -29,6 +29,7 @@ const Item = ({
   const base = process.env.NEXT_PUBLIC_URL
     ? process.env.NEXT_PUBLIC_URL
     : 'http://localhost:3000/';
+  console.log(base);
 
   return (
     <Card>
@@ -46,7 +47,7 @@ const Item = ({
           </div>
         </Link>
         <CardContent>
-          <Link href={base + category + '/' + slug}>
+          <Link href={base + category + '/' + slug} passHref>
             <PostTitle theme={theme}>
               <Typography gutterBottom variant="h5" component="h2">
                 {title}
