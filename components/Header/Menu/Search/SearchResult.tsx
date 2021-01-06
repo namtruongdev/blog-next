@@ -1,76 +1,87 @@
 import React from 'react';
-import Link from 'next/link';
+import PropTypes from 'prop-types';
 import {
-  resultCount,
-  listResults,
-  resultsLink,
-  resultsExcerpt,
-  lineResults,
-  algoliaLogo,
-} from './styles';
-import {
-  connectStateResults,
-  Highlight,
+  RefinementList,
+  SearchBox,
   Hits,
-  Index,
-  Snippet,
-  PoweredBy,
+  Configure,
+  Highlight,
+  Pagination,
+  InstantSearch,
 } from 'react-instantsearch-dom';
 
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+const HitComponent = ({ hit }: { hit: object }) => {
+  console.log(hit);
 
-const HitCount = connectStateResults(({ searchResults }) => {
-  const hitCount = searchResults && searchResults.nbHits;
-
-  return hitCount > 0 ? (
-    <div className="HitCount" css={resultCount}>
-      <Typography variant="body2" component="span" color="textSecondary">
-        {hitCount} kết quả
-      </Typography>
-    </div>
-  ) : null;
-});
-
-const PageHit = ({ hit }) => (
-  <>
-    <Link to={hit.permalink} css={resultsLink}>
-      <Typography variant="h6" component="h4" color="textPrimary">
-        <Highlight attribute="title" hit={hit} tagName="mark" />
-      </Typography>
-    </Link>
-    <Typography color="textSecondary">
-      <Snippet
-        attribute="excerpt"
-        hit={hit}
-        tagName="mark"
-        css={resultsExcerpt}
-      />
-    </Typography>
-    <Divider variant="middle" css={lineResults} />
-  </>
-);
-
-const HitsInIndex = ({ index }) => (
-  <Index indexName={index.name}>
-    <HitCount />
-    <Hits className="Hits" hitComponent={PageHit} css={listResults} />
-  </Index>
-);
-
-const SearchResult = ({ indices }) => {
   return (
-    <div>
-      {indices.map((index) => (
-        <HitsInIndex index={index} key={index.name} />
-      ))}
-      <PoweredBy
-        css={algoliaLogo}
-        translations={{
-          searchBy: 'Sức mạnh tìm kiếm từ',
-        }}
-      />
+    <div className="hit">
+      <div>
+        <div className="hit-picture">{/* <img src={`${hit.image}`} /> */}</div>
+      </div>
+      <div className="hit-content">
+        <div>
+          <Highlight attribute="name" hit={hit} />
+          {/* <span> - ${hit.price}</span>
+          <span> - {hit.rating} stars</span> */}
+        </div>
+        <div className="hit-type">
+          <Highlight attribute="type" hit={hit} />
+        </div>
+        <div className="hit-description">
+          <Highlight attribute="description" hit={hit} />
+        </div>
+      </div>
     </div>
+  );
+};
+
+type Props = {
+  searchState: object;
+  resultsState: object | [];
+  onSearchStateChange: Function;
+  createURL: Function;
+  indexName: string;
+  searchClient: object;
+};
+
+const SearchResult = ({
+  searchState,
+  resultsState,
+  onSearchStateChange,
+  createURL,
+  indexName,
+  searchClient,
+}: any) => {
+  return (
+    <InstantSearch
+      searchClient={searchClient}
+      resultsState={resultsState}
+      onSearchStateChange={onSearchStateChange}
+      searchState={searchState}
+      createURL={createURL}
+      indexName={indexName}
+    >
+      <Configure hitsPerPage={12} />
+      <header>
+        <h1>React InstantSearch + Next.Js</h1>
+        <SearchBox />
+      </header>
+      <main>
+        <div className="results">
+          <Hits hitComponent={HitComponent} />
+        </div>
+      </main>
+      <footer>
+        <Pagination />
+        <div>
+          See{' '}
+          <a href="https://github.com/algolia/react-instantsearch/tree/master/examples/next">
+            source code
+          </a>{' '}
+          on github
+        </div>
+      </footer>
+    </InstantSearch>
   );
 };
 

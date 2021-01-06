@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, MouseEvent, useCallback, useMemo } from 'react';
 import { withRouter } from 'next/router';
 import { GetStaticProps } from 'next';
 import { isEqual } from 'lodash';
@@ -6,18 +6,11 @@ import qs from 'qs';
 import algoliasearch from 'algoliasearch/lite';
 import { findResultsState } from 'react-instantsearch-dom/server';
 
-import { SearchIcon, useStyles, quering, SearchContainer } from './styles';
+import { SearchIcon, useStyles, SearchContainer } from './styles';
 
-import {
-  Popper,
-  Paper,
-  ClickAwayListener,
-  Typography,
-} from '@material-ui/core';
+import { Popper, Paper, ClickAwayListener, Fade } from '@material-ui/core';
 
-import Input from './input';
 import SearchResult from './SearchResult';
-import process from 'process';
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID as string,
@@ -38,25 +31,32 @@ const DEFAULT_PROPS = {
   searchClient,
   indexName: 'Postss',
 };
-const Search = ({ resultsState, searchState, router }: any) => {
+const Search = ({ resultsState, searchState, router, asPath }: any) => {
   const [searchStateRouter, setSearchStateRouter] = useState<any>({
     searchState: searchState,
     lastRouter: router,
   });
-  const anchorRef = useRef(null);
-  const [arrowRef, setArrowRef] = useState<HTMLSpanElement>();
+
+  console.log(asPath);
+
+  const [arrowRef, setArrowRef] = useState<HTMLSpanElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleClickButton = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+  const handleClickButton = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+      setOpen((prevOpen) => !prevOpen);
+    },
+    [anchorEl, open]
+  );
 
-  const handleClickAway = () => {
+  const handleClickAway = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
-  const id = open ? 'scroll-playground' : undefined;
+  const id = useMemo(() => (open ? 'scroll-playground' : undefined), [open]);
 
   const classes = useStyles();
 
@@ -77,16 +77,12 @@ const Search = ({ resultsState, searchState, router }: any) => {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <SearchContainer>
-        <SearchIcon
-          ref={anchorRef}
-          onClick={handleClickButton}
-          aria-describedby={id}
-        />
+        <SearchIcon onClick={handleClickButton} aria-describedby={id} />
 
         <Popper
           id={id}
           open={open}
-          anchorEl={anchorRef.current}
+          anchorEl={anchorEl}
           placement="bottom-end"
           disablePortal={false}
           className={classes.popper}
@@ -103,29 +99,31 @@ const Search = ({ resultsState, searchState, router }: any) => {
               element: arrowRef,
             },
           }}
+          transition
         >
-          {/* <span className={classes.arrow} ref={setArrowRef} /> */}
-          <Paper className={classes.paper}>
-            {/* <InstantSearch searchClient={searchClient} indexName="Posts">
-              <Configure hitsPerPage={5} distinct />
-              <Input />
-              <Results>
-                <SearchResult {...DEFAULT_PROPS}
-                  searchState={searchStateRouter.searchState}
-                  resultsState={searchStateRouter.resultsState}
-                  onSearchStateChange={onSearchStateChange}
-                  createURL={createURL}
-                />
-              </Results>
-            </InstantSearch> */}
-          </Paper>
+          {({ TransitionProps }) => (
+            <Fade {...TransitionProps} timeout={350}>
+              <>
+                <span className={classes.arrow} ref={setArrowRef} />
+                <Paper className={classes.paper}>
+                  <SearchResult
+                    {...DEFAULT_PROPS}
+                    searchState={searchStateRouter.searchState}
+                    resultsState={resultsState}
+                    onSearchStateChange={onSearchStateChange}
+                    createURL={createURL}
+                  />
+                </Paper>
+              </>
+            </Fade>
+          )}
         </Popper>
       </SearchContainer>
     </ClickAwayListener>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ asPath }: any) => {
+export const getServerSideProps = async ({ asPath }: any) => {
   const searchState = pathToSearchState(asPath);
   const resultsState = await findResultsState(SearchResult, {
     ...DEFAULT_PROPS,

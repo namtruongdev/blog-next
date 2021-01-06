@@ -118,11 +118,10 @@ export const resultsLink = styled.div`
 
 export const resultsExcerpt = styled.div`
   font-size: 0.75rem;
-  letter-spacing: 0.4px;
 `;
 
 export const lineResults = styled.div`
-margin 15px 0;
+  margin: 15px 0;
 `;
 
 export const algoliaLogo = styled.div`
@@ -138,7 +137,7 @@ export const algoliaLogo = styled.div`
   a {
     svg {
       width: 78;
-      heigth: 5;
+      height: 5;
     }
   }
 `;
