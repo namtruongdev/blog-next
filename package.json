@@ -18,6 +18,7 @@
     "date-fns": "^2.16.1",
     "firebase": "^8.2.1",
     "next": "latest",
+    "next-instantsearch": "^0.3.15",
     "qs": "^6.9.4",
     "react": "latest",
     "react-dom": "latest",
