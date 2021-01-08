@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 
 import SearchRounded from '@material-ui/icons/SearchRounded';
+import { Divider, Typography } from '@material-ui/core';
+
+import React from 'react';
 
 export const SearchIcon = styled(({ ...props }) => (
   <SearchRounded {...props} />
@@ -89,26 +92,14 @@ export const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const quering = styled.div`
+export const Quering = styled(({ ...props }) => <Typography {...props} />)`
   margin: 15px 0;
 `;
-export const resultCount = styled.div`
+export const ResultCount = styled.div`
   text-align: right;
 `;
 
-export const listResults = styled.div`
-  & {
-    ul {
-      padding: 0;
-
-      li {
-        list-style: none;
-      }
-    }
-  }
-`;
-
-export const resultsLink = styled.div`
+export const ResultsLink = styled.a`
   text-decoration: none;
   &:hover h4 {
     color: #eb6383;
@@ -116,30 +107,8 @@ export const resultsLink = styled.div`
   }
 `;
 
-export const resultsExcerpt = styled.div`
-  font-size: 0.75rem;
-`;
-
-export const lineResults = styled.div`
+export const LineResults = styled(Divider)`
   margin: 15px 0;
-`;
-
-export const algoliaLogo = styled.div`
-  text-align: right;
-  font-size: 0.75rem;
-  letter-spacing: 0.4px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  span {
-    margin-right: 10px;
-  }
-  a {
-    svg {
-      width: 78;
-      height: 5;
-    }
-  }
 `;
 
 export const SearchContainer = styled.div`

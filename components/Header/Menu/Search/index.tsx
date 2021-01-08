@@ -1,30 +1,18 @@
 import React, { useState, MouseEvent, useCallback, useMemo } from 'react';
-import algoliasearch from 'algoliasearch/lite';
-import { withInstantSearch } from 'next-instantsearch';
+import dynamic from 'next/dynamic';
+
+import { SearchIcon, useStyles, SearchContainer, Quering } from './styles';
+
 import {
-  Configure,
-  Highlight,
-  Hits,
-  Pagination,
-  RefinementList,
-  SearchBox,
-} from 'react-instantsearch-dom';
+  Popper,
+  Paper,
+  ClickAwayListener,
+  Fade,
+  TextField,
+} from '@material-ui/core';
 
-import { SearchIcon, useStyles, SearchContainer } from './styles';
+const Results = dynamic(() => import('./Results'));
 
-import { Popper, Paper, ClickAwayListener, Fade } from '@material-ui/core';
-
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID as string,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY as string
-);
-
-const HitComponent = ({ hit }: any) => <Highlight attribute="" hit={hit} />;
-
-const DEFAULT_PROPS = {
-  searchClient,
-  indexName: 'Postss',
-};
 const Search = () => {
   const [arrowRef, setArrowRef] = useState<HTMLSpanElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -38,6 +26,7 @@ const Search = () => {
     },
     [anchorEl, open]
   );
+  const [query, setQuery] = useState<string>('');
 
   const handleClickAway = useCallback(() => {
     setOpen(false);
@@ -79,11 +68,19 @@ const Search = () => {
               <>
                 <span className={classes.arrow} ref={setArrowRef} />
                 <Paper className={classes.paper}>
-                  <Configure hitsPerPage={12} />
-                  <SearchBox />
-                  <RefinementList attribute="" />
-                  <Hits hitComponent={HitComponent} />
-                  <Pagination />
+                  <TextField
+                    type="search"
+                    fullWidth
+                    className="SearchInput"
+                    id="standard-secondary"
+                    label="Tìm kiếm"
+                    color="secondary"
+                    aria-label="Tìm kiếm"
+                    onKeyUp={(e: any) =>
+                      setTimeout(() => setQuery(e.target.value), 700)
+                    }
+                  />
+                  <Results query={query} />
                 </Paper>
               </>
             </Fade>
@@ -94,4 +91,4 @@ const Search = () => {
   );
 };
 
-export default withInstantSearch(DEFAULT_PROPS)(Search);
+export default Search;
