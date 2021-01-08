@@ -1,7 +1,7 @@
 import React from 'react';
 import useSWR from 'swr';
 
-import { getAllPost } from '@/utils';
+import { getAllPost } from '@/utils/';
 
 type Props = {
   query: string;
